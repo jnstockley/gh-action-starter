@@ -1,12 +1,12 @@
 {
   "name": "gh-action-starter",
   "version": "1.0.0",
-  "description": "A production-ready GitHub Action starter (TypeScript + ncc).",
+  "description": "A production-ready GitHub Action starter (TypeScript + esbuild).",
   "main": "dist/index.js",
   "scripts": {
-    "clean": "rm -rf lib dist",
-    "build": "tsc -p tsconfig.build.json",
-    "bundle": "npm run build && ncc build lib/index.js -o dist --license licenses.txt",
+    "clean": "rm -rf dist",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/index.js --legal-comments=external",
+    "bundle": "npm run build",
     "lint": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -18,17 +18,17 @@
   ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.0",
-    "@vercel/ncc": "^0.38.1",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
     "typescript": "^5.4.5",
-    "vitest": "^1.6.0"
+    "vitest": "^4.0.0"
   }
 }
