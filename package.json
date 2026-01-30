@@ -1,13 +1,34 @@
 {
   "name": "gh-action-starter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A production-ready GitHub Action starter (TypeScript + ncc).",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf lib dist",
+    "build": "tsc -p tsconfig.build.json",
+    "bundle": "npm run build && ncc build lib/index.js -o dist --license licenses.txt",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
-  "keywords": [],
+  "keywords": [
+    "github-action",
+    "starter",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@vercel/ncc": "^0.38.1",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
 }
